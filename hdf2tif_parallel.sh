@@ -6,7 +6,7 @@
 ################################################################################
 export H=12
 export V=10
-export FIRST=3
+export FIRST=512
 
 # get files to export
 export FILES=$(find /home/scidb/MODIS -type f | grep "MOD13Q1\.A[0-9]\{7\}\.h"$H"v"$V"\.006\.[0-9]\{13\}\.hdf$" | sort | head -n $FIRST)
