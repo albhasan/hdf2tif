@@ -2,13 +2,13 @@
 ################################################################################
 # Export an HDF file to TIF
 # TODO:
-# - Fail to export all the bands when NO subdataset ID is given. Bands above 9 are missing
+# - add an OUTPUT DIRECTORY parameter
 #-------------------------------------------------------------------------------
 # Usage:
 # ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf
 # ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf 3
-# ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf 0 0 40 40 
-# ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf 3 0 0 40 40 
+# ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf 0 0 40 40
+# ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf 3 0 0 40 40
 ################################################################################
 
 # is gdal installed?
@@ -64,4 +64,3 @@ for ((i=0;i<${#array[@]};++i)); do
 done
 
 exit 0
-
