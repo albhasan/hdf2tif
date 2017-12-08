@@ -41,18 +41,21 @@ else
 fi
 
 win=""
+fsuffix=""
 if [ $# -eq 5 ] ; then
     xoff=$2
     yoff=$3
     xsize=$4
     ysize=$5
-    win="-srcwin $xoff $yoff $xsize $ysize"
+    win="$xoff $yoff $xsize $ysize" # win="-srcwin $xoff $yoff $xsize $ysize"
+    fsuffix="_$xoff_$yoff_$xsize_$ysize"
 elif [ $# -eq 6 ] ; then
     xoff=$3
     yoff=$4
     xsize=$5
     ysize=$6
     win="-srcwin $xoff $yoff $xsize $ysize"
+    fsuffix="_$xoff_$yoff_$xsize_$ysize"
 fi
 
 array=($sds)                # subdata set names
@@ -60,7 +63,7 @@ array2=($fnames)            # output filenames
 array3=($tilenames)         # info regarding the MODIS tile
 for ((i=0;i<${#array[@]};++i)); do
     bname=$(echo "${array2[i]}" | tr '_' ' ') # build band name from output filename
-    eval "gdal_translate -of GTiff $win '${array[i]}:$bname' ${array3[i]}_${array2[i]}.tif"
+    eval "gdal_translate -of GTiff -srcwin $win '${array[i]}:$bname' ${array3[i]}_${array2[i]}$fsuffix.tif"
 done
 
 exit 0
