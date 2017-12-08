@@ -2,19 +2,28 @@
 ################################################################################
 # Export HDF files to TIF in parallel
 #-------------------------------------------------------------------------------
-#
+# TODO:
+# - addapt to new version of hdf2bin which support putput paths
+#-------------------------------------------------------------------------------
+# ./hdf2bin_parallel.sh 12 10 0 0 400 400 /home/scidb/MODIS
 ################################################################################
-export H=12
-export V=10
+#export H=12
+#export V=10
 export FIRST=512
-export xoff=0
-export yoff=0
-export xsize=400
-export ysize=400
-export path_modis=/home/scidb/MODIS
+#export xoff=0
+#export yoff=0
+#export xsize=400
+#export ysize=400
+#export path_modis=/home/scidb/MODIS
 export path_tmp="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-export FILES=$(find $path_modis -type f | grep "MOD13Q1\.A[0-9]\{7\}\.h"$H"v"$V"\.006\.[0-9]\{13\}\.hdf$" | sort | head -n $FIRST)
+H=$1
+V=$2
+xoff=$3
+yoff=$4
+xsize=$5
+ysize=$6
+path_modis=$7
 
 date
 
