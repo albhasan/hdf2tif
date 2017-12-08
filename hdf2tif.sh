@@ -48,7 +48,7 @@ if [ $# -eq 5 ] ; then
     xsize=$4
     ysize=$5
     win="$xoff $yoff $xsize $ysize" # win="-srcwin $xoff $yoff $xsize $ysize"
-    fsuffix="_$xoff_$yoff_$xsize_$ysize"
+    fsuffix=_"$xoff"_"$yoff"_"$xsize"_"$ysize"
 elif [ $# -eq 6 ] ; then
     xoff=$3
     yoff=$4
