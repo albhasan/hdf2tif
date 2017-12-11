@@ -32,7 +32,7 @@ else
     echo 'ERROR: Wrong number of parameters'
     echo ''
     echo 'Usage: '
-    echo 'hdf2tif.sh HDF_file [subdataset] [xoff yoff xsize ysize]'
+    echo 'hdf2tif.sh HDF_file output [subdataset] [xoff yoff xsize ysize]'
     echo '  HDF_file    Path to a HDF file'
     echo '  output      Path to the output directory'
     echo '  subdataset  Number. A subdataset ID (See gdalinfo)'
