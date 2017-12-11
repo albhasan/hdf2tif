@@ -11,6 +11,23 @@
 # is parallel installed?
 command -v parallel >/dev/null 2>&1 || { echo >&2 "ERROR: GNU parallel not found."; exit 1; }
 
+if [ $# -ne 9 ] ; then
+    echo 'ERROR: Wrong number of parameters'
+    echo ''
+    echo 'Usage: '
+    echo 'hdf2bin_parallel.sh tile_H tile_V xoff yoff xsize ysize path_modis path_tmp'
+    echo '  tile_H      Number. The MODIS tile in the H direction'
+    echo '  tile_V      Number. The MODIS tile in the V direction'
+    echo '  xoff        Number. First pixel to export'
+    echo '  yoff        Number. First pixel to export'
+    echo '  xsize       Number of pixels to export'
+    echo '  ysize       Number of pixels to export'
+    echo '  path_modis  Path to a repository of MODIS data (HDF files)'
+    echo '  path_tmp    Path to a temporal directory'
+    echo '  path_output Path to store the results'
+    exit 1
+fi
+
 #H=12
 #V=10
 FIRST=512
@@ -20,7 +37,7 @@ FIRST=512
 #ysize=400
 #path_modis=/home/scidb/MODIS
 #path_output=/home/scidb/alber/ghprojects/hdf2tif/output
-path_tmp="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#path_tmp="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 H=$1
 V=$2
@@ -29,6 +46,8 @@ yoff=$4
 xsize=$5
 ysize=$6
 path_modis=$7
+path_tmp=$8
+path_output=$9
 
 date
 
