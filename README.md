@@ -16,11 +16,6 @@ Export MODIS MOD13Q1 images to Geotif
 
 
 ## Instructions
-1 Clone this repository.
-2 Make the scripts executable.
-3 Call `hdf2tif.sh` to see its help.
-4 Optionally, modify and run *hdf2tif_parallel.sh* to export the same band of several HDFs.
+- Clone this repository.
+- Call `hdf2tif.sh` and `hdf2tif_parallel.sh` to see their help.
 
-
-## Notes:
-- *hdf2tif_parallel.sh* is just an example and it doesn't receive arguments. Change its source code to adapt it to your needs.
