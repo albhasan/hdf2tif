@@ -66,7 +66,7 @@ array2=($fnames)            # output filenames
 array3=($tilenames)         # info regarding the MODIS tile
 for ((i=0;i<${#array[@]};++i)); do
     bname=$(echo "${array2[i]}" | tr '_' ' ') # build band name from output filename
-    eval "gdal_translate -of GTiff -srcwin $win '${array[i]}:$bname' $outputdir/${array3[i]}_${array2[i]}$fsuffix.tif"
+    eval "gdal_translate -of GTiff $win '${array[i]}:$bname' $outputdir/${array3[i]}_${array2[i]}$fsuffix.tif"
 done
 
 exit 0
