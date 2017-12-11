@@ -19,15 +19,15 @@ hdf=$1
 outputdir=$2
 if [ $# -eq 2 -o $# -eq 6 ] ; then
     #echo "Exporting all subdatasets..."
-    sds=$(      gdalinfo $hdf | grep "SUBDATASET_[0-9]\{1,2\}_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{print $1":"$2":"$3":"$4}')
-    fnames=$(   gdalinfo $hdf | grep "SUBDATASET_[0-9]\{1,2\}_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{ print $5 }' |  tr -s ' ' | tr ' ' '_')
-    tilenames=$(gdalinfo $hdf | grep "SUBDATASET_[0-9]\{1,2\}_NAME"  | awk -F "=" '{ print $2 }' | awk -F '"' '{ print $2 }' | awk -F "/" '{ print $NF }' | awk -F "." '{ print $1"_"$3"_"$4"_"$2 }')
+    sds=$(      gdalinfo "$hdf" | grep "SUBDATASET_[0-9]\{1,2\}_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{print $1":"$2":"$3":"$4}')
+    fnames=$(   gdalinfo "$hdf" | grep "SUBDATASET_[0-9]\{1,2\}_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{ print $5 }' |  tr -s ' ' | tr ' ' '_')
+    tilenames=$(gdalinfo "$hdf" | grep "SUBDATASET_[0-9]\{1,2\}_NAME"  | awk -F "=" '{ print $2 }' | awk -F '"' '{ print $2 }' | awk -F "/" '{ print $NF }' | awk -F "." '{ print $1"_"$3"_"$4"_"$2 }')
 elif [ $# -eq 3 -o $# -eq 7 ] ; then
     #echo "Export a single subdataset..."
     sdsid=$3
-    sds=$(      gdalinfo $hdf | grep "SUBDATASET_"$sdsid"_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{print $1":"$2":"$3":"$4}')
-    fnames=$(   gdalinfo $hdf | grep "SUBDATASET_"$sdsid"_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{ print $5 }' |  tr -s ' ' | tr ' ' '_')
-    tilenames=$(gdalinfo $hdf | grep "SUBDATASET_"$sdsid"_NAME"  | awk -F "=" '{ print $2 }' | awk -F '"' '{ print $2 }' | awk -F "/" '{ print $NF }' | awk -F "." '{ print $1"_"$3"_"$4"_"$2 }')
+    sds=$(      gdalinfo "$hdf" | grep "SUBDATASET_""$sdsid""_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{print $1":"$2":"$3":"$4}')
+    fnames=$(   gdalinfo "$hdf" | grep "SUBDATASET_""$sdsid""_NAME"  | awk -F "=" '{ print $2 }' | awk -F ":" '{ print $5 }' |  tr -s ' ' | tr ' ' '_')
+    tilenames=$(gdalinfo "$hdf" | grep "SUBDATASET_""$sdsid""_NAME"  | awk -F "=" '{ print $2 }' | awk -F '"' '{ print $2 }' | awk -F "/" '{ print $NF }' | awk -F "." '{ print $1"_"$3"_"$4"_"$2 }')
 else
     echo 'ERROR: Wrong number of parameters'
     echo ''
