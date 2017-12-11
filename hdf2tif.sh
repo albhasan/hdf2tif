@@ -50,7 +50,7 @@ if [ $# -eq 6 ] ; then
     yoff=$4
     xsize=$5
     ysize=$6
-    win="$xoff $yoff $xsize $ysize" # win="-srcwin $xoff $yoff $xsize $ysize"
+    win="-srcwin $xoff $yoff $xsize $ysize"
     fsuffix=_"$xoff"_"$yoff"_"$xsize"_"$ysize"
 elif [ $# -eq 7 ] ; then
     xoff=$4
