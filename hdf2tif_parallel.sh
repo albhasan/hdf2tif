@@ -53,7 +53,7 @@ rm            "$FILES_EVI"
 # QUALITY
 #BAND=3
 #time parallel --jobs 16 "$path_tmp"/./hdf2tif.sh {1} $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
-#                FILES_QA=$(  find "$path_tmp" -type f | grep "MOD13Q1_h"$H"v"$V"_006_A[0-9]\{7\}_250m_16_days_VI_Quality\.tif$"       | sort | head -n $FIRST)
+#                FILES_QA=$(  find "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_VI_Quality\.tif$"       | sort | head -n $FIRST)
 #gdal_merge.py "$FILES_QA"   -separate -o MOD13Q1_h"$H"v"$V"_006_250m_16_days_VI_Quality.tif
 #rm            "$FILES_QA"
 
@@ -88,35 +88,35 @@ rm            "$FILES_MIR"
 # VIEW ZENITH ANGLE
 #BAND=8
 #time parallel --jobs 16 "$path_tmp"/./hdf2tif.sh {1} $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
-#               FILES_VIEW=$(find "$path_tmp" -type f | grep "MOD13Q1_h"$H"v"$V"_006_A[0-9]\{7\}_250m_16_days_view_zenith_angle\.tif$" | sort | head -n $FIRST)
+#               FILES_VIEW=$(find "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_view_zenith_angle\.tif$" | sort | head -n $FIRST)
 #gdal_merge.py "$FILES_VIEW" -separate -o MOD13Q1_h"$H"v"$V"_006_250m_16_days_view_zenith_angle.tif
 #rm            "$FILES_VIEW"
 
 # SUN ZENITH ANGLE
 #BAND=9
 #time parallel --jobs 16 "$path_tmp"/./hdf2tif.sh {1} $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
-#               FILES_SUN=$( find "$path_tmp" -type f | grep "MOD13Q1_h"$H"v"$V"_006_A[0-9]\{7\}_250m_16_days_sun_zenith_angle\.tif$" | sort | head -n $FIRST)
+#               FILES_SUN=$( find "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_sun_zenith_angle\.tif$" | sort | head -n $FIRST)
 #gdal_merge.py "$FILES_SUN"  -separate -o MOD13Q1_h"$H"v"$V"_006_250m_16_days_sun_zenith_angle.tif
 #rm            "$FILES_SUN"
 
 # RELATIVE AZIMUTH ANGLE
 #BAND=10
 #time parallel --jobs 16 "$path_tmp"/./hdf2tif.sh {1} $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
-#                FILES_REL=$( find "$path_tmp" -type f | grep "MOD13Q1_h"$H"v"$V"_006_A[0-9]\{7\}_250m_16_days_relative_azimuth_angle\.tif$" | sort | head -n $FIRST)
+#                FILES_REL=$( find "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_relative_azimuth_angle\.tif$" | sort | head -n $FIRST)
 #gdal_merge.py "$FILES_REL"  -separate -o MOD13Q1_h"$H"v"$V"_006_250m_16_days_relative_azimuth_angle.tif
 #rm            "$FILES_REL"
 
 # COMPOSITE DAY OF THE YEAR
 #BAND=11
 #time parallel --jobs 16 "$path_tmp"/./hdf2tif.sh {1} $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
-#               FILES_DOY=$( find "$path_tmp" -type f | grep "MOD13Q1_h"$H"v"$V"_006_A[0-9]\{7\}_250m_16_days_composite_day_of_the_year\.tif$" | sort | head -n $FIRST)
+#               FILES_DOY=$( find "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_composite_day_of_the_year\.tif$" | sort | head -n $FIRST)
 #gdal_merge.py "$FILES_DOY"  -separate -o MOD13Q1_h"$H"v"$V"_006_250m_16_days_composite_day_of_the_year.tif
 #rm            "$FILES_DOY"
 
 # PIXEL RELIABILITY
 #BAND=12
 #time parallel --jobs 16 "$path_tmp"/./hdf2tif.sh {1} $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
-#               FILES_PRE=$( find "$path_tmp" -type f | grep "MOD13Q1_h"$H"v"$V"_006_A[0-9]\{7\}_250m_16_days_pixel_reliability\.tif$" | sort | head -n $FIRST)
+#               FILES_PRE=$( find "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_pixel_reliability\.tif$" | sort | head -n $FIRST)
 #gdal_merge.py "$FILES_PRE"  -separate -o MOD13Q1_h"$H"v"$V"_006_250m_16_days_pixel_reliability.tif
 #rm            "$FILES_PRE"
 
