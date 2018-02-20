@@ -12,7 +12,7 @@
 # ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf /path/to/output 3 0 0 40 40
 ################################################################################
 
-# is gdal installed?
+# is gdal & R installed?
 command -v gdal_translate >/dev/null 2>&1 || { echo >&2 "ERROR: gdal_translate not found."; exit 1; }
 
 hdf=$1
