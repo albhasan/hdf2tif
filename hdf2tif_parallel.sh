@@ -33,8 +33,9 @@ function .log () {
   fi
 }
 
-# is parallel installed?
+# Are parallel & Rscript installed?
 command -v parallel >/dev/null 2>&1 || { echo >&2 "ERROR: GNU parallel not found."; .log 0 "GNU parallel not found" ; exit 1; }
+command -v Rscript >/dev/null 2>&1 || { echo >&2 "ERROR: Rscript not found."; .log 0 "Rscript not found" ;exit 1; }
 
 if [ $# -ne 10 ] ; then
     echo 'ERROR: Wrong number of parameters'
@@ -71,11 +72,14 @@ njobs=$10
 .log 6 "Getting files to export..."
 FILES=$(find -L "$path_modis" -type f | grep "MOD13Q1\.A[0-9]\{7\}\.h""$H""v""$V""\.006\.[0-9]\{13\}\.hdf$" | sort | head -n $FIRST)
 
-.log 6 "Writting down the images's dates..." >> hdf2tif_parallel.log
+.log 6 "Writting down the images's dates (julian)..." >> hdf2tif_parallel.log
 FNAMES=($FILES)
 for ((i=0;i<${#FNAMES[@]};++i)); do
     basename "${FNAMES[i]}" | awk -F "." '{ print $2 }' >> "$path_output"/MOD13Q1_h"$H"v"$V"_006_dates.txt
 done
+
+.log 6 "Writting down the images's dates..." >> hdf2tif_parallel.log
+Rscript julday2date.R "$path_output"/MOD13Q1_h"$H"v"$V"_006_dates.txt
 
 .log 6 "Processing NDVI..."
 BAND=1
