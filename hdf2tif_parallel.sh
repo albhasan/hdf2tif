@@ -3,6 +3,7 @@
 # Export HDF files to TIF in parallel
 #-------------------------------------------------------------------------------
 # TODO:
+# ERROR 1: TIFFAppendToStrip:Maximum TIFF file size exceeded. Use BIGTIFF=YES creation option.
 #-------------------------------------------------------------------------------
 # ./hdf2tif_parallel.sh 12 10 0 0 400 400 /home/scidb/MOD13Q1 /home/scidb/alber/ghprojects/hdf2tif/tmp /home/scidb/alber/ghprojects/hdf2tif/output 16
 #-------------------------------------------------------------------------------
