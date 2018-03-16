@@ -3,7 +3,6 @@
 # Export an HDF file to TIF
 # TODO:
 # - TEST this new version!!!!
-# - add an OUTPUT DIRECTORY parameter
 #-------------------------------------------------------------------------------
 # Usage:
 # ./hdf2tif.sh /home/scidb/MODIS/2006/MOD13Q1.A2006161.h12v10.006.2015161172946.hdf /path/to/output
