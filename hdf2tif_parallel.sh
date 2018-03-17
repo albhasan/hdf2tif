@@ -52,7 +52,7 @@ if [ $# -ne 10 ] ; then
     echo '  path_modis  Path to a repository of MODIS data (HDF files)'
     echo '  path_tmp    Path to a temporal directory'
     echo '  path_output Path to store the results'
-    echo '  njobs Path  Maximum number of jubs to run in parallel'
+    echo '  njobs       Maximum number of jubs to run in parallel'
     exit 1
 fi
 
