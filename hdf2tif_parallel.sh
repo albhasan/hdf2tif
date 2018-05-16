@@ -5,7 +5,7 @@
 # TODO:
 # ERROR 1: TIFFAppendToStrip:Maximum TIFF file size exceeded. Use BIGTIFF=YES creation option.
 #-------------------------------------------------------------------------------
-# ./hdf2tif_parallel.sh 12 10 0 0 4800 4800 512 512 /home/scidb/MOD13Q1 /home/scidb/alber/ghprojects/hdf2tif/tmp /home/scidb/alber/ghprojects/hdf2tif/output 16 0
+# ./hdf2tif_parallel.sh 12 10 0 0 40 40 313 23 /home/scidb/MOD13Q1 /home/scidb/tmp /home/scidb 16 1
 #-------------------------------------------------------------------------------
 #H=10
 #V=10
@@ -13,7 +13,7 @@
 #yoff=0
 #xsize=4799
 #ysize=4799
-#first=10
+#first=69
 #nimgs=23
 #path_modis='/home/scidb/MODIS'
 #path_tmp='/home/scidb/Documents/tmp'
@@ -41,7 +41,7 @@ function .log () {
 command -v parallel >/dev/null 2>&1 || { echo >&2 "ERROR: GNU parallel not found."; .log 0 "GNU parallel not found" ; exit 1; }
 command -v Rscript >/dev/null 2>&1 || { echo >&2 "ERROR: Rscript not found."; .log 0 "Rscript not found" ;exit 1; }
 
-if [ $# -ne 10 ] ; then
+if [ $# -ne 13 ] ; then
     echo 'ERROR: Wrong number of parameters'
     echo ''
     echo 'Usage: '
