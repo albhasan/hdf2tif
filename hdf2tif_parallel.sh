@@ -87,7 +87,7 @@ FILES=$(find -L "$path_modis" -type f | grep "MOD13Q1\.A[0-9]\{7\}\.h""$H""v""$V
 FNAMES=($FILES)
 
 # Print the files and exit
-if [ $dry_run -ne 0 ] ; then
+if [ "$dry_run" -ne "0" ] ; then
     for ((i=0;i<${#FNAMES[@]};++i)); do
         echo "${FNAMES[i]}"
     done
