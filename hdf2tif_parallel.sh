@@ -4,6 +4,10 @@
 #-------------------------------------------------------------------------------
 # ./hdf2tif_parallel.sh 12 10 0 0 40 40 312 23 /home/scidb/MOD13Q1 /home/scidb/tmp /home/scidb 16 0
 #-------------------------------------------------------------------------------
+# NOTES:
+# - the following options increase the size of the files instead of diminishing it
+# -co "COMPRESS=LZW" -co "PREDICTOR=2" 
+#-------------------------------------------------------------------------------
 #H=10
 #V=10
 #xoff=0
@@ -103,86 +107,87 @@ Rscript julday2date.R "$path_output"/MOD13Q1_h"$H"v"$V"_006_dates.txt
 BAND=1
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" "$BAND" "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                FILES_NDVI=$(find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_NDVI.*\.tif$"             | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -3000 $FILES_NDVI -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_NDVI.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -3000 -a_nodata -3000 -n -3000 $FILES_NDVI -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_NDVI.tif
 rm            $FILES_NDVI
 
 .log 6 "Processing EVI..."
 BAND=2
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                FILES_EVI=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_EVI.*\.tif$"              | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -3000 $FILES_EVI -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_EVI.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -3000 -a_nodata -3000 -n -3000 $FILES_EVI -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_EVI.tif
 rm            $FILES_EVI
 
 .log 6 "Processing QUALITY..."
 BAND=3
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                 FILES_QA=$(  find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_VI_Quality.*\.tif$"       | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init 65535 $FILES_QA   -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_VI_Quality.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init 65535 -a_nodata 65535 -n 65535 $FILES_QA   -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_VI_Quality.tif
 rm            $FILES_QA
 
 .log 6 "Processing RED..."
 BAND=4
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                FILES_RED=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_red_reflectance.*\.tif$"  | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 $FILES_RED -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_red_reflectance.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 -a_nodata -1000 -n -1000 $FILES_RED -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_red_reflectance.tif
 rm            $FILES_RED
 
 .log 6 "Processing NIR..."
 BAND=5
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                 FILES_NIR=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_NIR_reflectance.*\.tif$"  | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 $FILES_NIR -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_NIR_reflectance.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 -a_nodata -1000 -n -1000 $FILES_NIR -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_NIR_reflectance.tif
 rm            $FILES_NIR
 
 .log 6 "Processing BLUE..."
 BAND=6
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                 FILES_BLUE=$(find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_blue_reflectance.*\.tif$" | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 $FILES_BLUE -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_blue_reflectance.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 -a_nodata -1000 -n -1000 $FILES_BLUE -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_blue_reflectance.tif
 rm            $FILES_BLUE
 
 .log 6 "Processing MIR..."
 BAND=7
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                FILES_MIR=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_MIR_reflectance.*\.tif$"  | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 $FILES_MIR -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_MIR_reflectance.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1000 -a_nodata -1000 -n -1000 $FILES_MIR -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_MIR_reflectance.tif
 rm            $FILES_MIR
 
 #.log 6 "Processing VIEW ZENITH ANGLE..."
 #BAND=8
 #parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
 #               FILES_VIEW=$(find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_view_zenith_angle.*\.tif$$" | sort )
-#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -10000 $FILES_VIEW -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_view_zenith_angle.tif
+#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -10000 -a_nodata -10000 -n -10000 $FILES_VIEW -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_view_zenith_angle.tif
 #rm            $FILES_VIEW
 
 #.log 6 "Processing SUN ZENITH ANGLE..."
 #BAND=9
 #parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
 #               FILES_SUN=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_sun_zenith_angle.*\.tif$" | sort )
-#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -10000 $FILES_SUN -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_sun_zenith_angle.tif
+#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -10000 -a_nodata -10000 -n -10000 $FILES_SUN -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_sun_zenith_angle.tif
 #rm            $FILES_SUN
 
 #.log 6 "Processing RELATIVE AZIMUTH ANGLE..."
 #BAND=10
 #parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
 #                FILES_REL=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_relative_azimuth_angle.*\.tif$" | sort )
-#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -4000 $FILES_REL -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_relative_azimuth_angle.tif
+#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -4000 -a_nodata -4000 -n -4000 $FILES_REL -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_relative_azimuth_angle.tif
 #rm            $FILES_REL
 
 #.log 6 "Processing COMPOSITE DAY OF THE YEAR..."
 #BAND=11
 #parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
 #               FILES_DOY=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_composite_day_of_the_year.*\.tif$" | sort )
-#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1 $FILES_DOY -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_composite_day_of_the_year.tif
+#gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1 -a_nodata -1 -n -1 $FILES_DOY -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_composite_day_of_the_year.tif
 #rm            $FILES_DOY
 
 .log 6 "Processing PIXEL RELIABILITY..."
 BAND=12
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                FILES_PRE=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_pixel_reliability.*\.tif$" | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1 $FILES_PRE -co "COMPRESS=LZW" -co "PREDICTOR=2" -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_pixel_reliability.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1 -a_nodata -1 -n -1 $FILES_PRE -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_pixel_reliability.tif
 rm            $FILES_PRE
 
 .log 6 "END"
 
 exit 0
+
