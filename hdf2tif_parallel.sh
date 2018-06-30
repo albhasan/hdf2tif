@@ -184,7 +184,7 @@ rm            $FILES_MIR
 BAND=12
 parallel --jobs "$njobs" ./hdf2tif.sh {1} "$path_tmp" $BAND "$xoff" "$yoff" "$xsize" "$ysize" ::: "$FILES" > /dev/null
                FILES_PRE=$( find -L "$path_tmp" -type f | grep "MOD13Q1_h""$H""v""$V""_006_A[0-9]\{7\}_250m_16_days_pixel_reliability.*\.tif$" | sort )
-gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init -1 -a_nodata -1 -n -1 $FILES_PRE -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_pixel_reliability.tif
+gdal_merge.py -of GTiff -co 'BIGTIFF=YES' -init 255 -a_nodata 255 -n 255 $FILES_PRE -separate -o "$path_output"/MOD13Q1_h"$H"v"$V"_006_250m_16_days_pixel_reliability.tif
 rm            $FILES_PRE
 
 .log 6 "END"
