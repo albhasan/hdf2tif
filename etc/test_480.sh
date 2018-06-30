@@ -4,5 +4,5 @@
 #-------------------------------------------------------------------------------
 # Last update 2018-06-26
 ################################################################################
-.././hdf2tif_parallel.sh 12 10 0 0 480 480 0 407 /home/scidb/MODIS/MOD13Q1 /home/scidb/tmp /disks/d7/hdf2tif_01_new 16 0 
+./hdf2tif_parallel.sh 12 10 0 0 480 480 0 407 /home/scidb/MODIS/MOD13Q1 /home/scidb/tmp /disks/d7/hdf2tif_01_new 16 0 
 
