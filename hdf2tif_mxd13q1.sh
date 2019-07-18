@@ -1,21 +1,20 @@
 #!/bin/bash
 ################################################################################
-# Export HDF files to TIF in parallel
+# Export MXD13Q1 HDF files to TIF in parallel
 #-------------------------------------------------------------------------------
-# TODO:
+# ./hdf2tif_mxd13q1.sh 12 10 0 0 400 400 /home/scidb/MOD13Q1 /home/scidb/alber/ghprojects/hdf2tif/tmp /home/scidb/alber/ghprojects/hdf2tif/output 16
 #-------------------------------------------------------------------------------
-# ./hdf2tif_parallel.sh 12 10 0 0 400 400 /home/scidb/MOD13Q1 /home/scidb/alber/ghprojects/hdf2tif/tmp /home/scidb/alber/ghprojects/hdf2tif/output 16
-#-------------------------------------------------------------------------------
-#H=12
-#V=10
-FIRST=512
-#xoff=0
-#yoff=0
-#xsize=400
-#ysize=400
-#path_modis=/home/scidb/MODIS
-#path_output=/home/scidb/alber/ghprojects/hdf2tif/output
-#path_tmp="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Example arguments: 
+# H=12
+# V=10
+FIRST=512 # Maximum number of images to process.
+# xoff=0
+# yoff=0
+# xsize=400
+# ysize=400
+# path_modis=/home/scidb/MODIS
+# path_output=/home/scidb/alber/ghprojects/hdf2tif/output
+# path_tmp="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ################################################################################
 
 # Adapted from https://stackoverflow.com/questions/8455991/elegant-way-for-verbose-mode-in-scripts#33597663
